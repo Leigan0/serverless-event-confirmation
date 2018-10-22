@@ -1,8 +1,10 @@
 import boto3
 from flask import Flask, jsonify, request
 import uuid 
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, origins=['http://ent.svcs.social.s3-website-eu-west-1.amazonaws.com'])
 
 dynamodb = boto3.resource('dynamodb')
 db = dynamodb.Table('social-attendees-dev')
