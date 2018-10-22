@@ -1,0 +1,48 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<body>
+  <h1>Do you want to come to a fun event?</h1>
+  <form id="rsvp" action="/tobeadded">
+    Name:<br>
+    <input type="text" name="name">
+    <br>
+    Gluten Free?:<br>
+    <input type="text" name="gf">
+    <br><br>
+    <input type="submit" value="Submit">
+  </form> 
+  
+  <p>Current attendees: <span id="attendees"></span></p>
+  <ol></ol>
+  <div id="success"></div> 
+  
+
+
+  <script>
+    const api = 'https://001m73lrhc.execute-api.eu-west-1.amazonaws.com/dev';
+    $(document).ready(function(){
+        fetch(api + '/attendees')
+      .then(res => res.json())
+      .then((result) => {
+          console.log(result)
+          result.attendees.map(attendee => $("ol").append(`<li>${attendee.name}, Team: ${attendee.team}</li>`))
+        });
+    })
+
+    // add validation
+document.querySelector('#rsvp')
+      .addEventListener('submit', (e) => {
+        e.preventDefault()
+        data = {}
+        const form = document.querySelector('#rsvp');
+        const formElements = Array.from(form);
+        formElements.map(input => (data[input.name] = input.value));
+        console.log(JSON.stringify(data));
+
+        fetch(api + `/attendees/new?name=${data.name}&GF=${data.gf}`, { method: 'POST' })
+          .then(res => res.json())
+          .then(result => $("#success").append(result.attendees));
+        }
+      );
+  </script>
+</body>
