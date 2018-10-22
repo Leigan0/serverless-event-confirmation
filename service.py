@@ -4,8 +4,6 @@ import uuid
 
 app = Flask(__name__)
 
-# Initialize dynamodb access
-boto3.setup_default_session(profile_name='social')
 dynamodb = boto3.resource('dynamodb')
 db = dynamodb.Table('social-attendees-dev')
 

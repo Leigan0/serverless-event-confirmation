@@ -1,0 +1,11 @@
+{
+    "dev": {
+        "app_function": "service.app",
+        "aws_region": "eu-west-1",
+        "profile_name": "social",
+        "project_name": "social-serverle",
+        "runtime": "python3.6",
+        "s3_bucket": "social-app-ab7dd70x5",
+        "manage_roles": false
+    }
+}
