@@ -1,69 +1,73 @@
 <html>
-  <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel='stylesheet' href='css/main.css'>
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel='stylesheet' href='css/main.css'>
 </head>
+
 <body>
-    
+  <div class="wrapper">
     <div class="example1">
-        <marquee behavior="alternate">Come have fun at Enterprise Services Social</marquee>
+      <marquee behavior="alternate">Come have fun at Enterprise Services Social</marquee>
     </div>
     <div class="example2">
-        <marquee behavior="scroll" direction="left">Looking forward to seeing you all there</marquee>
+      <marquee behavior="scroll" direction="left">Looking forward to seeing you all there</marquee>
     </div>
-  <div class="form">
-  <form id="rsvp" action="/tobeadded">
-    <span class="blink_text">Name</span>:<br>
-    <input type="text" name="name"required>
-    <br>
-    <span class="blink_text">Gluten Free?</span>:<br>
-    <input type="checkbox" id="checkbox" name="gf" value=true>
-    <br>
-    <span class="blink_text">Additional Dietary Requirements?</span>:<br>
-    <input type="text" name="diet">
-    <br>
-    <span class="blink_text">Hit to bullseye to get a team </span>:<br> 
-    <input type="submit" id="bullseye" value=''>
-  </form> 
-</div>
+    <div class="form">
+      <form id="rsvp" action="/tobeadded">
+        <span class="blink_text">Name</span>:<br>
+        <input type="text" name="name" required>
+        <br>
+        <span class="blink_text">Gluten Free?</span>:<br>
+        <input type="checkbox" id="checkbox" name="gf" value=true>
+        <br>
+        <span class="blink_text">Additional Dietary Requirements?</span>:<br>
+        <input type="text" name="diet">
+        <br>
+        <span class="blink_text">Hit to bullseye to get a team </span>:<br>
+        <input type="submit" id="bullseye" value=''>
+      </form>
+    </div>
 
-<div class="teams">
- <span class="blink_text">TEAMS </span>:<br> 
-<ol></ol>
-</div>
-  <div class="example3">
-  <marquee id="custom_cursor" behavior="scroll" direction="right">
-      <img src="http://d2dzjyo4yc2sta.cloudfront.net/?url=images.pitchero.com%2Fui%2F479874%2F1398880145_7486.jpg&w=820&t=fit&q=85" width="100" height="100" alt="smile">
-      <p>Lots of fun to be had here <a href="http://flightclubdarts.com/london/experiences/2-650-people/2-40/spaces/double-oche/">Flight Club </a>.</p>
+    <div class="teams">
+      <span class="blink_text">TEAMS </span>:<br>
+      <ol></ol>
+    </div>
+    <div class="example3">
+      <marquee id="custom_cursor" behavior="scroll" direction="right">
+        <img src="http://d2dzjyo4yc2sta.cloudfront.net/?url=images.pitchero.com%2Fui%2F479874%2F1398880145_7486.jpg&w=820&t=fit&q=85"
+          width="100" height="100" alt="smile">
+        Lots of fun to be had here Wednesday 7th November 2pm-5pm @ <a href="http://flightclubdarts.com/london/experiences/2-650-people/2-40/spaces/double-oche/">Flight
+          Club </a>
       </marquee>
     </div>
-  
+  </div>
+</body>
 
-  <script>
-    const api = 'https://tqdrmq2md4.execute-api.eu-west-1.amazonaws.com/dev';
-    $(document).ready(function(){
-        fetch(api + '/attendees')
+<script>
+  const api = 'https://tqdrmq2md4.execute-api.eu-west-1.amazonaws.com/dev';
+  $(document).ready(function () {
+    fetch(api + '/attendees')
       .then(res => res.json())
       .then((result) => {
-          console.log(result)
-          result.attendees.map(attendee => $("ol").append(`<li>${attendee.name}, Team: ${attendee.team}</li>`))
-        });
-    })
+        console.log(result)
+        result.attendees.map(attendee => $("ol").append(`<li>${attendee.name}, Team: ${attendee.team}</li>`))
+      });
+  })
 
-    // add validation
-document.querySelector('#rsvp')
-      .addEventListener('submit', (e) => {
-        e.preventDefault()
-        data = {}
-        const form = document.querySelector('#rsvp');
-        const formElements = Array.from(form);
-        formElements.map(input => (data[input.name] = input.value));
-        console.log(JSON.stringify(data));
-
-        fetch(api + `/attendees/new?name=${data.name}&GF=${data.gf}&diet=${data.diet}`, { method: 'POST' })
-          .then(res => res.json())
-          .then(result => window.location.reload());
-        }
-      );
-  </script>
-</body>
+  // add validation
+  document.querySelector('#rsvp')
+    .addEventListener('submit', (e) => {
+      e.preventDefault()
+      data = {}
+      const form = document.querySelector('#rsvp');
+      const formElements = Array.from(form);
+      formElements.map(input => (data[input.name] = input.value));
+      console.log(JSON.stringify(data));
+      fetch(api + `/attendees/new?name=${data.name}&GF=${data.gf}&diet=${data.diet}`, {
+          method: 'POST'
+        })
+        .then(res => res.json())
+        .then(result => window.location.reload());
+    });
+</script>

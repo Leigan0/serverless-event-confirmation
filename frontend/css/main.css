@@ -1,14 +1,19 @@
 body {
-    background:  url("https://media.giphy.com/media/Eyk50nAfYxeH6/giphy.gif") no-repeat center center fixed; 
+    background: url("https://media.giphy.com/media/Eyk50nAfYxeH6/giphy.gif") no-repeat center center fixed;
     background-size: cover;
     background-color: #cccccc;
     font-size: 60px;
     color: fuchsia;
     font-family: Comic Sans MS;
     width: 99%;
-    height:100vh;
+    height: 100vh;
     cursor: url("https://s3-eu-west-1.amazonaws.com/ent.svcs.social/img/softtip-transparency.png"), zoom-in;
 }
+
+div.wrapper {
+    position: absolute;
+}
+
 div.example2 {
     font-size: 30px;
     color: limegreen
@@ -18,13 +23,15 @@ div.example3 {
     font-size: 40px;
     color: tomato;
 }
-div.teams{
-    float:left;
+
+div.teams {
+    float: left;
     font-size: 20px;
-    color:orange;
+    color: orange;
 }
+
 div.form {
-    float:left;
+    float: left;
 
 }
 
@@ -35,6 +42,7 @@ form {
     margin-left: 200px;
     display: inline-block;
 }
+
 input {
     width: 250;
     height: 50;
@@ -44,9 +52,11 @@ input {
     border-width: 3px;
     border-color: darkgoldenrod
 }
+
 #checkbox {
     zoom: 1.3;
 }
+
 #bullseye {
     width: 166px;
     height: 166px;
@@ -60,6 +70,7 @@ input {
     display: inline-block;
     margin: 4px 25px;
 }
+
 input {
     width: 250;
     height: 50;
@@ -74,28 +85,51 @@ input {
 
     text-shadow: 2px 3px 5px tomato;
 
-    animation:1s blinker linear infinite;
-    -webkit-animation:1s blinker linear infinite;
-    -moz-animation:1s blinker linear infinite;
+    animation: 1s blinker linear infinite;
+    -webkit-animation: 1s blinker linear infinite;
+    -moz-animation: 1s blinker linear infinite;
 
-     color: gold;
+    color: gold;
+}
+
+@-moz-keyframes blinker {
+    0% {
+        opacity: 1.0;
     }
 
-    @-moz-keyframes blinker {  
-     0% { opacity: 1.0; }
-     50% { opacity: 0.0; }
-     100% { opacity: 1.0; }
-     }
+    50% {
+        opacity: 0.0;
+    }
 
-    @-webkit-keyframes blinker {  
-     0% { opacity: 1.0; }
-     50% { opacity: 0.0; }
-     100% { opacity: 1.0; }
-     }
+    100% {
+        opacity: 1.0;
+    }
+}
 
-    @keyframes blinker {  
-     0% { opacity: 1.0; }
-     50% { opacity: 0.0; }
-     100% { opacity: 1.0; }
-     }
+@-webkit-keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
 
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
+
+@keyframes blinker {
+    0% {
+        opacity: 1.0;
+    }
+
+    50% {
+        opacity: 0.0;
+    }
+
+    100% {
+        opacity: 1.0;
+    }
+}
