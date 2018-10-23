@@ -1,22 +1,43 @@
 <html>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel='stylesheet' href='css/main.css'>
+</head>
 <body>
-  <h1>Do you want to come to a fun event?</h1>
+    
+    <div class="example1">
+        <marquee behavior="alternate">Come have fun at Enterprise Services Social</marquee>
+    </div>
+    <div class="example2">
+        <marquee behavior="scroll" direction="left">Looking forward to seeing you all there</marquee>
+    </div>
+  <div class="form">
   <form id="rsvp" action="/tobeadded">
-    Name:<br>
-    <input type="text" name="name">
+    <span class="blink_text">Name</span>:<br>
+    <input type="text" name="name"required>
     <br>
-    Gluten Free?:<br>
-    <input type="text" name="gf">
-    <br><br>
-    <input type="submit" value="Submit">
+    <span class="blink_text">Gluten Free?</span>:<br>
+    <input type="checkbox" id="checkbox" name="gf" value=true>
+    <br>
+    <span class="blink_text">Additional Dietary Requirements?</span>:<br>
+    <input type="text" name="diet">
+    <br>
+    <span class="blink_text">Hit to bullseye to get a team </span>:<br> 
+    <input type="submit" id="bullseye" value=''>
   </form> 
-  
-  <p>Current attendees: <span id="attendees"></span></p>
-  <ol></ol>
-  <div id="success"></div> 
-  
+</div>
 
+<div class="teams">
+ <span class="blink_text">TEAMS </span>:<br> 
+<ol></ol>
+</div>
+  <div class="example3">
+  <marquee id="custom_cursor" behavior="scroll" direction="right">
+      <img src="http://d2dzjyo4yc2sta.cloudfront.net/?url=images.pitchero.com%2Fui%2F479874%2F1398880145_7486.jpg&w=820&t=fit&q=85" width="100" height="100" alt="smile">
+      <p>Lots of fun to be had here <a href="http://flightclubdarts.com/london/experiences/2-650-people/2-40/spaces/double-oche/">Flight Club </a>.</p>
+      </marquee>
+    </div>
+  
 
   <script>
     const api = 'https://tqdrmq2md4.execute-api.eu-west-1.amazonaws.com/dev';
@@ -39,9 +60,9 @@ document.querySelector('#rsvp')
         formElements.map(input => (data[input.name] = input.value));
         console.log(JSON.stringify(data));
 
-        fetch(api + `/attendees/new?name=${data.name}&GF=${data.gf}`, { method: 'POST' })
+        fetch(api + `/attendees/new?name=${data.name}&GF=${data.gf}&diet=${data.diet}`, { method: 'POST' })
           .then(res => res.json())
-          .then(result => $("#success").append(result.attendees));
+          .then(result => window.location.reload());
         }
       );
   </script>
